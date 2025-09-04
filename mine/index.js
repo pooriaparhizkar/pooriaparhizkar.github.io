@@ -301,3 +301,61 @@ updateCountdown();
 
 // Update every second
 setInterval(updateCountdown, 1000);
+
+
+const presentElement = document.getElementById("present");
+presentElement.addEventListener("click", () => {
+  if(!presentElement.classList.contains("opened")){
+    var duration = 60 * 1000;
+    var end = Date.now() + duration;
+    
+    (function frame() {
+      // launch a few confetti from the left edge
+      confetti({
+        particleCount: 30,
+        angle: 60,
+        spread: 120,
+        origin: { x: 0 }
+      });
+      // and launch a few from the right edge
+      confetti({
+        particleCount: 30,
+        angle: 120,
+        spread: 120,
+        origin: { x: 1 }
+      });
+    
+      // keep going until we are out of time
+      if (Date.now() < end) {
+        setTimeout(() => {
+          
+          requestAnimationFrame(frame);
+        }, 1000);
+      }
+    }());
+      // stop the buzz animation via class and animate with transform
+      presentElement.classList.add("opened");
+    
+      // compute how far to move vertically to reach the viewport center
+      const rect = presentElement.getBoundingClientRect();
+      const currentCenterY = rect.top + rect.height / 2;
+      const targetCenterY = window.innerHeight / 2;
+      const deltaY = targetCenterY - currentCenterY; // pixels to move
+    
+      // apply transform with transition defined in CSS
+      presentElement.style.transform = `translateY(${deltaY}px) scale(4)`;
+  }
+  else {
+    // Fade out and remove the present, then reveal the ticket with animation
+    presentElement.style.transition = 'opacity 400ms ease';
+    presentElement.style.opacity = '0';
+    setTimeout(() => {
+      presentElement.style.display = 'none';
+    }, 420);
+
+    const ticketEl = document.getElementById('ticket');
+    if (ticketEl && !ticketEl.classList.contains('show')) {
+      ticketEl.classList.add('show');
+    }
+  }
+});
