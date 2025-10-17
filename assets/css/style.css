@@ -14455,24 +14455,24 @@ div#featured-project-carousel {
   font-weight: 500;
 }
 .personal-experience-inner .content .maintitle {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 700;
   line-height: 62px;
   color: var(--color-lightn);
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .personal-experience-inner .content .maintitle {
-    font-size: 30px;
+    font-size: 22px;
   }
 }
 @media only screen and (max-width: 575px) {
   .personal-experience-inner .content .maintitle {
-    font-size: 30px;
+    font-size: 20px;
   }
 }
 @media only screen and (max-width: 479px) {
   .personal-experience-inner .content .maintitle {
-    font-size: 24px;
+    font-size: 18px;
   }
 }
 .personal-experience-inner .experience-list {
