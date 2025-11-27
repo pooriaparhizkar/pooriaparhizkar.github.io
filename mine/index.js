@@ -288,12 +288,14 @@ function updateCountdown() {
   let timeDifference = today.getTime() - anniversaryDate.getTime();
 
   // Calculate days, hours, minutes, and seconds
+  let years = Math.floor(timeDifference / (1000 * 3600 * 24 * 365));
+  timeDifference -= years * (1000 * 3600 * 24 * 365);
   let days = Math.floor(timeDifference / (1000 * 3600 * 24));
   let hours = Math.floor((timeDifference % (1000 * 3600 * 24)) / (1000 * 3600));
   let minutes = Math.floor((timeDifference % (1000 * 3600)) / (1000 * 60));
   let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-  document.getElementById("days").innerHTML = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+  document.getElementById("days").innerHTML = `${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
 }
 
 // Initial update
