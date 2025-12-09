@@ -282,28 +282,6 @@ draw();
 let anniversaryDate= new Date("12/09/2022");
 anniversaryDate.setHours(17);
 anniversaryDate.setMinutes(30);
-let today = new Date();
-function updateCountdown() {
-  let today = new Date();
-  let timeDifference = today.getTime() - anniversaryDate.getTime();
-
-  // Calculate days, hours, minutes, and seconds
-  let years = Math.floor(timeDifference / (1000 * 3600 * 24 * 365));
-  timeDifference -= years * (1000 * 3600 * 24 * 365);
-  let days = Math.floor(timeDifference / (1000 * 3600 * 24));
-  let hours = Math.floor((timeDifference % (1000 * 3600 * 24)) / (1000 * 3600));
-  let minutes = Math.floor((timeDifference % (1000 * 3600)) / (1000 * 60));
-  let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-  document.getElementById("days").innerHTML = `${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-}
-
-// Initial update
-updateCountdown();
-
-// Update every second
-setInterval(updateCountdown, 1000);
-
 
 const presentElement = document.getElementById("present");
 presentElement.addEventListener("click", () => {
@@ -361,3 +339,73 @@ presentElement.addEventListener("click", () => {
     }
   }
 });
+
+//TODO = Delete following line
+let tempUpdateCounter=50;
+
+
+function updateCountdown() {
+  // let today = new Date();
+
+  //TODO = Delete following lines
+  let today= new Date("12/08/2025");
+  today.setHours(17);
+  today.setMinutes(29);
+  today.setSeconds(tempUpdateCounter);
+  if(tempUpdateCounter>52)
+    document.getElementById("days-container").classList.add("big");
+
+  
+  if(tempUpdateCounter<60)
+    tempUpdateCounter++;
+  else 
+    presentElement.style.visibility = 'visible';
+
+    
+
+  // Until Here
+
+  let timeDifference = today.getTime() - anniversaryDate.getTime();
+
+  // Calculate days, hours, minutes, and seconds
+  let years = Math.floor(timeDifference / (1000 * 3600 * 24 * 365));
+  timeDifference -= years * (1000 * 3600 * 24 * 365);
+  let days = Math.floor(timeDifference / (1000 * 3600 * 24));
+  let hours = Math.floor((timeDifference % (1000 * 3600 * 24)) / (1000 * 3600));
+  let minutes = Math.floor((timeDifference % (1000 * 3600)) / (1000 * 60));
+  let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+  document.getElementById("days").innerHTML = `${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+}
+
+// Initial update
+updateCountdown();
+
+// Update every second
+setInterval(updateCountdown, 1000);
+
+
+
+function downloadVideo() {
+  const videoUrl = './anniversaryVideo.mp4';
+  
+  fetch(videoUrl)
+    .then(response => response.blob())
+    .then(blob => {
+      // Create a temporary URL for the video blob
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      // Set the filename you want
+      a.download = 'AnniversaryVideo.mp4';
+      
+      document.body.appendChild(a);
+      a.click();
+      
+      // Clean up
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    })
+    .catch(() => alert('Could not download the video.'));
+}
