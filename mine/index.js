@@ -386,26 +386,3 @@ setInterval(updateCountdown, 1000);
 
 
 
-function downloadVideo() {
-  const videoUrl = './anniversaryVideo.mp4';
-  
-  fetch(videoUrl)
-    .then(response => response.blob())
-    .then(blob => {
-      // Create a temporary URL for the video blob
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      // Set the filename you want
-      a.download = 'AnniversaryVideo.mp4';
-      
-      document.body.appendChild(a);
-      a.click();
-      
-      // Clean up
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    })
-    .catch(() => alert('Could not download the video.'));
-}
