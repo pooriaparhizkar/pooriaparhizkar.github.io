@@ -283,6 +283,7 @@ let anniversaryDate= new Date("12/09/2022");
 anniversaryDate.setHours(17);
 anniversaryDate.setMinutes(30);
 
+
 const presentElement = document.getElementById("present");
 presentElement.addEventListener("click", () => {
   if(!presentElement.classList.contains("opened")){
