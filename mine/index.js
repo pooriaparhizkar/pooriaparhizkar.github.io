@@ -324,7 +324,19 @@ presentElement.addEventListener("click", () => {
     
       // apply transform with transition defined in CSS
       presentElement.style.transform = `translateY(${deltaY}px) scale(4)`;
+  
+  const langBtn = document.getElementById("lang");
+langBtn.addEventListener("click", () => {
+  const en = document.querySelector("#long-text.en");
+  const fa = document.querySelector("#long-text.fa");
+  if (fa.style.display === "none" || fa.style.display === "") {
+    fa.style.display = "flex";
+    en.style.display = "none";
+  } else {
+    fa.style.display = "none";
+    en.style.display = "flex";
   }
+});  }
   else {
     // Fade out and remove the present, then reveal the ticket with animation
     presentElement.style.transition = 'opacity 400ms ease';
@@ -380,6 +392,8 @@ function updateCountdown() {
 
 // Initial update
 updateCountdown();
+
+
 
 // Update every second
 setInterval(updateCountdown, 1000);
